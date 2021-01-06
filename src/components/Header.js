@@ -6,10 +6,8 @@ import NotFound from "./NotFound";
 import { format } from "date-fns";
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
   Link,
   NavLink,
 } from "react-router-dom";
@@ -123,9 +121,8 @@ class Header extends Component {
   // CRUD
   // Post: CREATE
   createPost(title,content){
-    var title = (arguments[0] != null) ? arguments[0] : "";
-    var content = (arguments[1] != null) ? arguments[1] : "";
-    const todos = this.state.posts;
+    title = (arguments[0] != null) ? arguments[0] : "";
+    content = (arguments[1] != null) ? arguments[1] : "";
     const path = "/post/0";
     const url = this.state.restapiEndpoint + "/post/0/" + this.state.enableprofanityfilter;
     fetch(url,{
@@ -146,7 +143,7 @@ class Header extends Component {
       data['path'] = path;
       data['response'] = "200 OK";
       const json = JSON.stringify(data,null,2);
-      if(data['error'].trim() == ""){
+      if(data['error'].trim() === ""){
         if(this.props.global_consoleDebug){
           console.log('Header: createPost(): Success: data:', data);
         }
@@ -161,7 +158,7 @@ class Header extends Component {
     })
     .catch((error) => {
       error.text().then( errorMessage => {
-        const error = JSON.parse(errorMessage);
+        //const error = JSON.parse(errorMessage);
         //const errorText = error['ERROR'];
         const errorText = "An error occurred on the server. Please try again later...";
         const data = {};
@@ -180,17 +177,17 @@ class Header extends Component {
   }
   // Post: READ
   readPost(page,origin,json,sortmethod,sortby,postbatch,error){
-    var page = (arguments[0] != null) ? arguments[0] : 1;
-    var origin = (arguments[1] != null) ? arguments[1] : "";
-    var json = (arguments[2] != null) ? arguments[2] : "";
-    var sortmethod = (arguments[3] != null) ? arguments[3] : this.state.sortmethod;
-    var sortby = (arguments[4] != null) ? arguments[4] : this.state.sortby;
-    var postbatch = (arguments[5] != null) ? arguments[5] : this.state.postbatch;
-    var error = (arguments[6] != null) ? arguments[6] : "";
+    page = (arguments[0] != null) ? arguments[0] : 1;
+    origin = (arguments[1] != null) ? arguments[1] : "";
+    json = (arguments[2] != null) ? arguments[2] : "";
+    sortmethod = (arguments[3] != null) ? arguments[3] : this.state.sortmethod;
+    sortby = (arguments[4] != null) ? arguments[4] : this.state.sortby;
+    postbatch = (arguments[5] != null) ? arguments[5] : this.state.postbatch;
+    error = (arguments[6] != null) ? arguments[6] : "";
     if(this.props.global_consoleDebug){
       console.log('Header: readPost(): postbatch:', postbatch);
     }
-    if(origin != ""){
+    if(origin !== ""){
       this.setState({
         dataFetched: false  
       });
@@ -243,13 +240,13 @@ class Header extends Component {
           //}
           this.toggleEndpoints(this.state.restapiEndpointType);
         });
-        if(json != ""){
+        if(json !== ""){
           const restapiContainerTextInner = document.getElementById("restapi-container-text-inner");
           if(restapiContainerTextInner){
             restapiContainerTextInner.innerText = json;
             const restapiContainerText = document.getElementById("restapi-container-text");
             if(restapiContainerText){
-              if(error.trim() == ""){
+              if(error.trim() === ""){
                 restapiContainerText.style.background = "rgba(0,0,0,0.0125)";
               }
               else{
@@ -258,7 +255,7 @@ class Header extends Component {
             }
             const restapiContainerTextSubtitleSpan = document.getElementById("restapi-container-text-subtitle-span");
             if(restapiContainerTextSubtitleSpan){
-              if(error.trim() == ""){
+              if(error.trim() === ""){
                 restapiContainerTextSubtitleSpan.innerText = "No errors detected";
               }
               else{
@@ -268,7 +265,7 @@ class Header extends Component {
               let restapiContainerTextSubtitleIcon = document.getElementById(id);
               if(restapiContainerTextSubtitleIcon){
                 restapiContainerTextSubtitleIcon.classList.remove("information","error","fa-check-circle","fa-ban");
-                if(error.trim() == ""){
+                if(error.trim() === ""){
                   restapiContainerTextSubtitleIcon.classList.add("fa-check-circle","information");
                 }
                 else{
@@ -347,7 +344,7 @@ class Header extends Component {
       //if(this.props.global_consoleDebug){
         console.log("Header: showProfanitylist(): display: ",display);
       //}
-      if(display.trim() == "none"){
+      if(display.trim() === "none"){
         profanityList.style.display = "block";
       }
       else{
@@ -425,7 +422,7 @@ class Header extends Component {
       //if(buttonTitle.trim() != ""){
         dialogContainer.querySelector('button.callback')
         .addEventListener('click', function() {
-          if(callback == 1){
+          if(callback === 1){
             this.showProfanitylist();
           }
         }.bind(this));
@@ -520,7 +517,7 @@ class Header extends Component {
       const contentValue = this.state.contentValue;
       const slug = this.createSlug(inputValue);
       const content = this.capitalizeFirstLetter(contentValue);
-      const createdAt = format(new Date(), "YYYY-MM-DD HH:mm:ss");
+      const createdAt = format(new Date(), "yyyy-mm-dd hh:mm:ss");
       todos.push({
         title: inputValue,
         done: false,
@@ -597,7 +594,7 @@ class Header extends Component {
     if(postid > 0){
       this.deletePost(postid);
     }
-    if(origin == "post"){
+    if(origin === "post"){
       this.setState({
         redirect: true
       });
@@ -637,7 +634,7 @@ class Header extends Component {
       function (post, index) {
         const link = "/post/" + post.slug;
         return (
-          <NavLink className="mdl-navigation__link" to={link} key={index}>
+          <NavLink className="mdl-navigation__link" to={link} key={post.postid}>
             {post.title}
           </NavLink>
         );
@@ -645,7 +642,7 @@ class Header extends Component {
     );
     //this.state.dataFetched = false;
     return (
-    this.state.dataFetched == true ? (
+    this.state.dataFetched === true ? (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header id="mdl-layout__header" className="mdl-layout__header">
           <Link to="/">

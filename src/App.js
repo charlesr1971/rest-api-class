@@ -3,21 +3,16 @@ import Header from "./components/Header";
 
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  NavLink,
 } from "react-router-dom";
 
 import './App.css';
 
 const global_height = 55;
 const global_consoleDebug = false;
-const global_enableProfanityFilter = 1;
+const global_enableProfanityFilter = 0;
 
-const global_restapiEndpointInsecure = document.domain == "localhost" ? "http://localhost:8500/react/react-router-es6/assets/cfm/rest/api/v1/index.cfm" : "http://playground.application.me.uk/react-router-es6/assets/cfm/rest/api/v1/index.cfm";
-const global_restapiEndpointSecure = document.domain == "localhost" ? "http://localhost:8500/react/react-router-es6/assets/cfm/rest/api/v1/index.cfm" : "https://community.establishmindfulness.com/assets-react_es6_restapi/cfm/rest/api/v1/index.cfm";
+const global_restapiEndpointInsecure = document.domain === "localhost" ? "http://localhost:8500/react/react-router-es6/assets/cfm/rest/api/v1/index.cfm" : "http://playground.application.me.uk/react-router-es6/assets/cfm/rest/api/v1/index.cfm";
+const global_restapiEndpointSecure = document.domain === "localhost" ? "http://localhost:8500/react/react-router-es6/assets/cfm/rest/api/v1/index.cfm" : "https://community.establishmindfulness.com/assets-react_es6_restapi/cfm/rest/api/v1/index.cfm";
 
 class App extends Component {
   constructor(props) {

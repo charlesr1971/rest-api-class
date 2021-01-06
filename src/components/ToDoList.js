@@ -5,13 +5,11 @@ import Pagination from "./Pagination";
 import Endpoint from "./Endpoint";
 import EnableProfanityFilter from "./EnableProfanityFilter";
 
+import { CSSPlugin, TweenMax, Elastic } from "gsap";
+
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Redirect,
-  Link,
-  NavLink,
 } from "react-router-dom";
 
 class ToDoList extends Component {
@@ -91,15 +89,17 @@ class ToDoList extends Component {
       console.log("ToDoList: animatePostCountIcon(): postCountIcon: ",postCountIcon);
     }
     if(postCountIcon){
-      window.TweenMax.to(postCountIcon,0.5,{
+      TweenMax.to(postCountIcon,0.5,{
       scale:0.25,
       onComplete:function(){
-        window.TweenMax.to(postCountIcon,1.4,{
-        scale:1,
-        ease:window.Elastic.easeOut,
-        easeParams:[overshoot,period]
-        })
-      }
+            TweenMax.to(postCountIcon,1.4,{
+            scale:1,
+            /* ease:Elastic.easeOut,
+            easeParams:[overshoot,period] */
+            //Elastic.easeOut.config(overshoot,period)
+            ease:Elastic.easeOut.config(overshoot,period)
+          })
+        }
       });
     }
   }
@@ -326,6 +326,7 @@ class ToDoList extends Component {
             global_enableProfanityFilter={this.props.global_enableProfanityFilter} 
             global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} 
             global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} 
+            key={index}
           />
         );
       }.bind(this)

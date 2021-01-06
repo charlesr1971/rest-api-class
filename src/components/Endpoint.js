@@ -35,10 +35,10 @@ class Endpoint extends Component {
     const restapiEndpointType = this.props.restapiEndpointType;
     let optsSecure = {};
     let optsInsecure = {};
-    if(restapiEndpointType == "secure") {
+    if(restapiEndpointType === "secure") {
       optsSecure['checked'] = "checked";
     }
-    if(restapiEndpointType == "insecure") {
+    if(restapiEndpointType === "insecure") {
       optsInsecure['checked'] = "checked";
     }
     if(this.props.global_consoleDebug){

@@ -35,10 +35,10 @@ class EnableProfanityFilter extends Component {
     const enableprofanityfilter = this.props.enableprofanityfilter;
     let optsYes = {};
     let optsNo = {};
-    if(enableprofanityfilter == 1) {
+    if(enableprofanityfilter === 1) {
       optsYes['checked'] = "checked";
     }
-    if(enableprofanityfilter == 0) {
+    if(enableprofanityfilter === 0) {
       optsNo['checked'] = "checked";
     }
     if(this.props.global_consoleDebug){
