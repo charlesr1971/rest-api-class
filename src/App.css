@@ -372,9 +372,9 @@ button {
 }
 
 .mdl-textfield {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 label {
@@ -400,14 +400,14 @@ label {
 }
 
 .mdl-layout__header {
-  position: relative;
+  position: relative !important;
 }
 
 .mdl-layout__header a.bitbucket-link {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  right: 60px;
+  transform: translateY(-50%);
   color: rgba(255,255,255,1);
   font-size: 24px;
 }
@@ -419,8 +419,9 @@ label {
 
 .mdl-layout__header i.home {
   position: absolute;
-  top: 20px;
+  top: 50%;
   right: 20px;
+  transform: translateY(-50%);
   color: rgba(255,255,255,1);
   font-size: 24px;
 }

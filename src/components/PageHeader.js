@@ -643,11 +643,12 @@ class PageHeader extends Component {
     const headerLink = (<Link to="/"><i className="fa fa-home home"></i></Link>);
     const headerA = (<a className="bitbucket-link" href="https://bitbucket.org/charlesrobertson/react-router-es6/src/master/" target="_blank"><i className="fa fa-github"></i></a>);
     const headerSpan = (<span className="mdl-layout-title">Postman REST API</span>);
-    const header = (<span>{headerLink}{headerA}{headerSpan}</span>);
     return (
     this.state.dataFetched === true ? (
       <Layout fixedHeader>
-        <Header title={header}>
+        <Header title={headerSpan}>
+        {headerLink}
+        {headerA}
         </Header>
         <Drawer title="Postman REST API">
           <Navigation className="mdl-navigation">

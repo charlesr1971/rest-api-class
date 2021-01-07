@@ -33,16 +33,18 @@ class Endpoint extends Component {
     //}
     return (
       <p className="radio-container">
-        <RadioGroup name="radio-secure-insecure" onChange={this.props.toggleEndpoints.bind(this,this.props.restapiEndpointType)} value={this.props.restapiEndpointType}>
+        <RadioGroup name="radio-secure-insecure" value={this.props.restapiEndpointType}>
             <Radio 
             value="secure" 
             ripple 
+            onClick={this.props.toggleEndpoints.bind(this,"secure")}
             >
               Secure, slow endpoint
             </Radio>
             <Radio 
             value="insecure" 
             ripple 
+            onClick={this.props.toggleEndpoints.bind(this,"insecure")}
             >
               Insecure, fast endpoint<br />
               <span>This may cause UX issues, depending on which device/browser is being used.</span><br />

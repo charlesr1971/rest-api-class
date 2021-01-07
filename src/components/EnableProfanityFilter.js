@@ -33,11 +33,12 @@ class EnableProfanityFilter extends Component {
     //}
     return (
       <p className="radio-container">
-        <RadioGroup name="radio-yes-no" onChange={this.props.toggleEnableprofanityfilter.bind(this,enableprofanityfilter)} value={enableprofanityfilter}>
+        <RadioGroup name="radio-yes-no" value={enableprofanityfilter}>
             <Radio 
             id="radio-yes" 
             value="1" 
             ripple 
+            onClick={this.props.toggleEnableprofanityfilter.bind(this,1)}
             >
               Yes
             </Radio>
@@ -45,6 +46,7 @@ class EnableProfanityFilter extends Component {
             id="radio-no" 
             value="0" 
             ripple 
+            onClick={this.props.toggleEnableprofanityfilter.bind(this,0)}
             >
               No
             </Radio>

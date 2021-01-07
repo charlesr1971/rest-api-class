@@ -15,12 +15,12 @@ class Pagination extends Component {
       console.log('Pagination: render(): pageMax:', pageMax,' this.props.page: ',this.props.page,' this.props.ordinal: ',this.props.ordinal);
     }
     let optsClassName = {};
-    if(this.props.page >= pageMax && this.props.maxpostpage == this.props.ordinal) {
+    if(this.props.page >= pageMax && this.props.maxpostpage === this.props.ordinal) {
       optsClassName['className'] = "max";
       ordinal = page;
     }
     else{
-      if(page == this.props.ordinal) {
+      if(page === this.props.ordinal) {
         optsClassName['className'] = "current";
       }
     }
