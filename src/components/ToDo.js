@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Checkbox } from 'react-mdl';
 import {
   BrowserRouter as Router,
   Link,
@@ -49,19 +49,13 @@ class ToDo extends Component {
         }}>
           <i className="fa fa-link"></i>
         </Link>
-        <label
-          className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-          htmlFor={id2}
-        >
-          <input
-          type="checkbox"
-          id={id2}
-          className="mdl-checkbox__input"
-          onChange={this.props.removeTodo}
-          checked="checked"
-          />
-          <span className="mdl-checkbox__label">{this.props.title}</span>
-        </label>
+        <Checkbox 
+        id={id2} 
+        label={this.props.title} 
+        onChange={this.props.removeTodo} 
+        ripple 
+        checked
+         />
         <div className="createdat-container">{this.props.createdAt}</div>
       </div>
     );

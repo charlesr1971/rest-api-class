@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Header from "./components/Header";
-
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
+
+import PageHeader from "./components/PageHeader";
 
 import './App.css';
 
@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header global_height={this.state.global_height} global_consoleDebug={this.state.global_consoleDebug}  global_enableProfanityFilter={this.state.global_enableProfanityFilter}  global_restapiEndpointInsecure={this.state.global_restapiEndpointInsecure}  global_restapiEndpointSecure={this.state.global_restapiEndpointSecure} />
+          <PageHeader global_height={this.state.global_height} global_consoleDebug={this.state.global_consoleDebug}  global_enableProfanityFilter={this.state.global_enableProfanityFilter}  global_restapiEndpointInsecure={this.state.global_restapiEndpointInsecure}  global_restapiEndpointSecure={this.state.global_restapiEndpointSecure} />
         </div>
       </Router>
     );

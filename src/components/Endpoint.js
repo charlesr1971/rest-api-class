@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
+import { RadioGroup, Radio } from 'react-mdl';
 
 class Endpoint extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      optsSecure: {},
-      optsInsecure: {}
-    };
     if(this.props.global_consoleDebug){
       console.log('Endpoint: constructor(): this.props:', this.props);
     }
@@ -16,44 +13,42 @@ class Endpoint extends Component {
   componentDidMount() {
     window.componentHandler.upgradeDom();
     setTimeout(function(){
-      this.addClassToRadioSecureInsecure();
+      //this.addClassToRadioSecureInsecure();
     }.bind(this),0);
   }
   addClassToRadioSecureInsecure() {
-    const labelRadioSecureInsecure = this.props.restapiEndpointType === "secure" ?  document.getElementById("label-radio-secure") : document.getElementById("label-radio-insecure");
+    const radioSecureInsecure = this.props.restapiEndpointType === "secure" ?  document.getElementById("radio-secure").parentElement : document.getElementById("radio-insecure").parentElement;
     if(this.props.global_consoleDebug){
-      console.log("Endpoint: addClassToRadioSecureInsecure(): labelRadioSecureInsecure: ",labelRadioSecureInsecure);
+      console.log("Endpoint: addClassToRadioSecureInsecure(): radioSecureInsecure: ",radioSecureInsecure);
     }
-    if(labelRadioSecureInsecure){
-      labelRadioSecureInsecure.classList.add("is-checked");
+    if(radioSecureInsecure){
+      radioSecureInsecure.classList.add("is-checked");
       window.componentHandler.upgradeDom();
     }
   }
   render() {
-    const id1 = "radio-secure";
-    const id2 = "radio-insecure";
     const restapiEndpointType = this.props.restapiEndpointType;
-    let optsSecure = {};
-    let optsInsecure = {};
-    if(restapiEndpointType === "secure") {
-      optsSecure['checked'] = "checked";
-    }
-    if(restapiEndpointType === "insecure") {
-      optsInsecure['checked'] = "checked";
-    }
-    if(this.props.global_consoleDebug){
-      console.log('Endpoint: render(): optsSecure: ', optsSecure,' optsInsecure: ',optsInsecure);
-    }
+    //if(this.props.global_consoleDebug){
+      console.log("Endpoint: render(): restapiEndpointType: ",restapiEndpointType);
+    //}
     return (
       <p className="radio-container">
-        <label id="label-radio-secure" className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor={id1}>
-          <input type="radio" id={id1} className="mdl-radio__button" name="radio-secure-insecure" value="secure" onChange={this.props.toggleEndpoints.bind(this,"secure")} {...optsSecure} />
-          <span className="mdl-radio__label">Secure, slow endpoint</span>
-        </label>
-        <label id="label-radio-insecure" className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor={id2}>
-          <input type="radio" id={id2} className="mdl-radio__button" name="radio-secure-insecure" value="insecure" onChange={this.props.toggleEndpoints.bind(this,"insecure")} {...optsInsecure} />
-          <span className="mdl-radio__label">Insecure, fast endpoint.<br /><span>This may cause UX issues, depending on which device/browser is being used.</span><br /><span><strong>codepen.io does not allow connections to insecure resources</strong></span></span>
-        </label>
+        <RadioGroup name="radio-secure-insecure" onChange={this.props.toggleEndpoints.bind(this,this.props.restapiEndpointType)} value={this.props.restapiEndpointType}>
+            <Radio 
+            value="secure" 
+            ripple 
+            >
+              Secure, slow endpoint
+            </Radio>
+            <Radio 
+            value="insecure" 
+            ripple 
+            >
+              Insecure, fast endpoint<br />
+              <span>This may cause UX issues, depending on which device/browser is being used.</span><br />
+              <span><strong>codepen.io does not allow connections to insecure resources</strong></span>
+            </Radio>
+        </RadioGroup>
       </p>
     )
   }

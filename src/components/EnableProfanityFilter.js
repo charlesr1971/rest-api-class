@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
+import { RadioGroup, Radio } from 'react-mdl';
 
 class EnableProfanityFilter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      optsYes: {},
-      optsNo: {}
-    };
     if(this.props.global_consoleDebug){
       console.log('EnableProfanityFilter: constructor(): this.props:', this.props);
     }
@@ -20,7 +17,7 @@ class EnableProfanityFilter extends Component {
     }.bind(this),0);
   }
   addClassToRadioYesNo() {
-    const labelRadioYesNo = this.props.enableprofanityfilter === 1 ?  document.getElementById("label-radio-yes") : document.getElementById("label-radio-no");
+    const labelRadioYesNo = this.props.enableprofanityfilter === 1 ?  document.getElementById("radio-yes").parentElement : document.getElementById("radio-no").parentElement;
     if(this.props.global_consoleDebug){
       console.log("EnableProfanityFilter: addClassToRadioYesNo(): labelRadioYesNo: ",labelRadioYesNo);
     }
@@ -30,30 +27,28 @@ class EnableProfanityFilter extends Component {
     }
   }
   render() {
-    const id1 = "radio-yes";
-    const id2 = "radio-no";
     const enableprofanityfilter = this.props.enableprofanityfilter;
-    let optsYes = {};
-    let optsNo = {};
-    if(enableprofanityfilter === 1) {
-      optsYes['checked'] = "checked";
-    }
-    if(enableprofanityfilter === 0) {
-      optsNo['checked'] = "checked";
-    }
-    if(this.props.global_consoleDebug){
-      console.log('EnableProfanityFilter: render(): optsYes: ', optsYes,' optsNo: ',optsNo);
-    }
+    //if(this.props.global_consoleDebug){
+      console.log("EnableProfanityFilter: render(): enableprofanityfilter: ",enableprofanityfilter);
+    //}
     return (
       <p className="radio-container">
-        <label id="label-radio-yes" className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor={id1}>
-          <input type="radio" id={id1} className="mdl-radio__button" name="radio-yes-no" value="1" onChange={this.props.toggleEnableprofanityfilter.bind(this,1)} {...optsYes} />
-          <span className="mdl-radio__label">Yes</span>
-        </label>
-        <label id="label-radio-no" className="mdl-radio mdl-js-radio mdl-js-ripple-effect" htmlFor={id2}>
-          <input type="radio" id={id2} className="mdl-radio__button" name="radio-yes-no" value="0" onChange={this.props.toggleEnableprofanityfilter.bind(this,0)} {...optsNo} />
-          <span className="mdl-radio__label">No</span>
-        </label>
+        <RadioGroup name="radio-yes-no" onChange={this.props.toggleEnableprofanityfilter.bind(this,enableprofanityfilter)} value={enableprofanityfilter}>
+            <Radio 
+            id="radio-yes" 
+            value="1" 
+            ripple 
+            >
+              Yes
+            </Radio>
+            <Radio 
+            id="radio-no" 
+            value="0" 
+            ripple 
+            >
+              No
+            </Radio>
+        </RadioGroup>
       </p>
     )
   }

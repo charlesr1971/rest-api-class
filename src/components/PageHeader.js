@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import ToDoList from "./ToDoList";
-import Posts from "./Posts";
-import NotFound from "./NotFound";
-
+import { Spinner, Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 import { format } from "date-fns";
-
 import {
   Switch,
   Route,
@@ -12,7 +8,11 @@ import {
   NavLink,
 } from "react-router-dom";
 
-class Header extends Component {
+import ToDoList from "./ToDoList";
+import Posts from "./Posts";
+import NotFound from "./NotFound";
+
+class PageHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -510,7 +510,7 @@ class Header extends Component {
     value = value + "-" + id;
     return value;
   }
-  addTodo(e) {
+  addTodo() {
     const todos = this.state.posts;
     if (this.state.inputValue.trim() != "") {
       const inputValue = this.state.inputValue;
@@ -542,7 +542,6 @@ class Header extends Component {
     var json = (arguments[2] != null) ? arguments[2] : "";
     var sortmethod = (arguments[3] != null) ? arguments[3] : this.state.sortmethod;
     var sortby = (arguments[4] != null) ? arguments[4] : this.state.sortby;
-    var enableprofanityfilter = (arguments[5] != null) ? arguments[5] : this.state.enableprofanityfilter;
     if(this.props.global_consoleDebug){
       console.log('Header: handleSelectChange():  page: ',page,' origin: ',origin,' json: ',json,' sortmethod: ',sortmethod,' sortby: ',sortby,' postbatch: ',event.target.value);
     }
@@ -615,18 +614,18 @@ class Header extends Component {
       restapiEndpoint: type === "secure" ? this.props.global_restapiEndpointSecure : this.props.global_restapiEndpointInsecure,
       restapiEndpointType: type 
     },function(){
-      if(this.props.global_consoleDebug){
-        console.log("Header: toggleEndpoints(): this.state.restapiEndpoint: ",this.state.restapiEndpoint,"this.state.restapiEndpointType: ",this.state.restapiEndpointType);
-      }
+      //if(this.props.global_consoleDebug){
+        console.log("Header: toggleEndpoints(): this.state.restapiEndpoint: ",this.state.restapiEndpoint," this.state.restapiEndpointType: ",this.state.restapiEndpointType);
+      //}
     });
   }
   toggleEnableprofanityfilter(type) {
     this.setState({
       enableprofanityfilter: type 
     },function(){
-      if(this.props.global_consoleDebug){
+      //if(this.props.global_consoleDebug){
         console.log("Header: toggleEnableprofanityfilter(): this.state.enableprofanityfilter: ",this.state.enableprofanityfilter);
-      }
+      //}
     });
   }
   render() {
@@ -641,30 +640,24 @@ class Header extends Component {
       }.bind(this)
     );
     //this.state.dataFetched = false;
+    const headerLink = (<Link to="/"><i className="fa fa-home home"></i></Link>);
+    const headerA = (<a className="bitbucket-link" href="https://bitbucket.org/charlesrobertson/react-router-es6/src/master/" target="_blank"><i className="fa fa-github"></i></a>);
+    const headerSpan = (<span className="mdl-layout-title">Postman REST API</span>);
+    const header = (<span>{headerLink}{headerA}{headerSpan}</span>);
     return (
     this.state.dataFetched === true ? (
-      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header id="mdl-layout__header" className="mdl-layout__header">
-          <Link to="/">
-            <i className="fa fa-home home"></i>
-          </Link>
-            <a className="bitbucket-link" href="https://bitbucket.org/charlesrobertson/react-router-es6/src/master/" target="_blank"><i className="fa fa-github"></i></a>
-          <div className="mdl-layout__header-row">
-            <span className="mdl-layout-title">Postman REST API</span>
-            <div className="mdl-layout-spacer"></div>
-            <nav className="mdl-navigation mdl-layout--large-screen-only"></nav>
-          </div>
-        </header>
-        <div className="mdl-layout__drawer">
-          <span className="mdl-layout-title">Postman REST API</span>
-          <nav className="mdl-navigation">
+      <Layout fixedHeader>
+        <Header title={header}>
+        </Header>
+        <Drawer title="Postman REST API">
+          <Navigation className="mdl-navigation">
             <NavLink className="mdl-navigation__link" to="/">
               Home
             </NavLink>
             {posts}
-          </nav>
-        </div>
-        <main className="mdl-layout__content">
+          </Navigation>
+        </Drawer>
+        <Content>
           <div className="page-content">
             <Switch>
               <Route
@@ -700,15 +693,15 @@ class Header extends Component {
               <Route component={NotFound} />
             </Switch>
           </div>
-        </main>
-      </div>
+        </Content>
+      </Layout>
       )
       :
       (
       <div className="spinner-container-outer">
         <div className="spinner-container-fetch">
           <div className="spinner-container-inner">
-            <div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+            <Spinner singleColor />
           </div>
         </div>
       </div>
@@ -717,4 +710,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default PageHeader;

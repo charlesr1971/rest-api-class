@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import { Textfield, Button, Spinner } from 'react-mdl';
+import { CSSPlugin, TweenMax, Elastic } from "gsap";
+import {
+  BrowserRouter as Router,
+  Redirect,
+} from "react-router-dom";
+
 import ToDo from "./ToDo";
 import Post from "./Post";
 import Pagination from "./Pagination";
 import Endpoint from "./Endpoint";
 import EnableProfanityFilter from "./EnableProfanityFilter";
-
-import { CSSPlugin, TweenMax, Elastic } from "gsap";
-
-import {
-  BrowserRouter as Router,
-  Redirect,
-} from "react-router-dom";
 
 class ToDoList extends Component {
   constructor(props) {
@@ -480,7 +480,7 @@ class ToDoList extends Component {
       );
     }
     if(!todos){
-      todos = (<div className="spinner-container"><div className="spinner-container-inner"><div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div></div></div>)
+      todos = (<div className="spinner-container"><div className="spinner-container-inner"><Spinner singleColor /></div></div>)
     }
     const mdltextfieldStyle = {
       marginBottom: "0px"
@@ -522,35 +522,37 @@ class ToDoList extends Component {
           {pagination}
           <form>
             <div className="mdl-textfield mdl-js-textfield" style={mdltextfieldStyle}>
-            <input
-              type="text" id="todoInput" name="todoInput" 
-              value={this.props.inputValue}
-              onChange={this.props.handleChange.bind(this)}
-              className="mdl-textfield__input"
-              placeholder="Post title"
-            />
-            <label
-              className="mdl-textfield__label"
-              htmlFor="todoInput"
-            ></label>
+              <Textfield 
+              value={this.props.inputValue} 
+              onChange={this.props.handleChange.bind(this)} 
+              placeholder="Post title" 
+              label="" 
+              />
             </div>
             <div className="mdl-textfield mdl-js-textfield">
-              <textarea className="mdl-textfield__input" type="text" rows= "6" id="contentInput" name="contentInput" placeholder="Post content" value={this.props.contentValue}
-              onChange={this.props.handleContentChange.bind(this)} ></textarea>
-              <label class="mdl-textfield__label" for="contentInput"></label>
+              <Textfield 
+              value={this.props.contentValue} 
+              onChange={this.props.handleContentChange.bind(this)} 
+              placeholder="Post content" 
+              label="" 
+              rows="6" 
+              />
             </div>
             <a className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={this.props.addTodo.bind(this)}>
-            Add Post
+              Add Post
             </a>
           </form>
           <div id="restapi-container" className="restapi-container">
             <div id="restapi-container-legend" className="restapi-container-legend">
-            Message from Server
+              Message from Server
             </div>
             <div id="restapi-container-text" className="restapi-container-text">
-            <div id="restapi-container-text-subtitle" className="restapi-container-text-subtitle"><i id="restapi-container-text-subtitle-icon" className="fa fa-check-circle information"></i><span id="restapi-container-text-subtitle-span">No errors detected</span></div>
-            <div id="restapi-container-text-inner" className="restapi-container-text-inner">
-            </div>
+              <div id="restapi-container-text-subtitle" className="restapi-container-text-subtitle">
+                <i id="restapi-container-text-subtitle-icon" className="fa fa-check-circle information"></i>
+                <span id="restapi-container-text-subtitle-span">No errors detected</span>
+              </div>
+              <div id="restapi-container-text-inner" className="restapi-container-text-inner">
+              </div>
             </div>
           </div>
           <div style={clearbothStyle}></div>
