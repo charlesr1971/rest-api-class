@@ -258,6 +258,16 @@ i {
   cursor: pointer;
 }
 
+i.app-enableprofanityfilter {
+  position: absolute;
+  top: 492px;
+  right: 56px;
+  font-size: 16px;
+  color: rgba(0,0,0,.5) !important;
+  z-index: 3;
+  cursor: pointer;
+}
+
 .todo-container {
   position: relative;
   min-height: 220px;
@@ -714,6 +724,11 @@ select.profanity-list {
   
   .mdl-card__actions.enableprofanityfilter i {
     top: 110px;
+  }
+
+  i.app-enableprofanityfilter {
+    top: 605px;
+    right: 40px;
   }
   
   .mdl-dialog {

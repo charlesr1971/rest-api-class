@@ -317,7 +317,7 @@ class ToDoList extends Component {
         return (
           <Pagination 
             ordinal={page} 
-            readPost={this.props.readPost.bind(this,page,this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch)} 
+            readPost={this.props.readPost.bind(this,page,this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch,"")} 
             page={this.props.page} 
             pages={this.props.pages} 
             maxpostpage={this.props.maxpostpage} 
@@ -336,7 +336,7 @@ class ToDoList extends Component {
         const defaultStyle = this.props.page == 1 ? {cursor: "default", color: "rgba(0,0,0,0.05)"} : {cursor: "pointer", color: "rgba(0,0,0,0.5)"};
         let opts = {};
         if(this.props.page != 1) {
-          opts['onClick'] = this.props.readPost.bind(this,parseInt(this.props.page - 1),this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch);
+          opts['onClick'] = this.props.readPost.bind(this,parseInt(this.props.page - 1),this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch,"");
         }
         return (
           page == 1 ? 
@@ -355,7 +355,7 @@ class ToDoList extends Component {
         const defaultStyle = this.props.page == this.props.pages ? {cursor: "default", color: "rgba(0,0,0,0.05)"} : {cursor: "pointer", color: "rgba(0,0,0,0.5)"};
         let opts = {};
         if(this.props.page != this.props.pages) {
-          opts['onClick'] = this.props.readPost.bind(this,parseInt(this.props.page + 1),this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch);
+          opts['onClick'] = this.props.readPost.bind(this,parseInt(this.props.page + 1),this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch,"");
         }
         return (
           page == this.props.maxpostpage ? 
@@ -379,7 +379,7 @@ class ToDoList extends Component {
       titleSortmethodUpOptsClassName['className'] = "fa fa-arrow-circle-up current";
     }
     let titleSortmethodUpOpts = {};
-    titleSortmethodUpOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Title","ASC",this.props.postbatch);
+    titleSortmethodUpOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Title","ASC",this.props.postbatch,"");
     const titleSortmethodUp = (<i {...titleSortmethodUpOptsClassName} {...titleSortmethodUpOpts}></i>);
     let titleSortmethodDownOptsClassName = {};
     titleSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down";
@@ -387,7 +387,7 @@ class ToDoList extends Component {
       titleSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down current";
     }
     let titleSortmethodDownOpts = {};
-    titleSortmethodDownOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Title","DESC",this.props.postbatch);
+    titleSortmethodDownOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Title","DESC",this.props.postbatch,"");
     const titleSortmethodDown = (<i {...titleSortmethodDownOptsClassName} {...titleSortmethodDownOpts}></i>);
     const titleColumnTitle = (<div className="column-title"><span>Title</span>{titleSortmethodUp}{titleSortmethodDown}</div>);
     let submissiondateSortmethodUpOptsClassName = {};
@@ -396,7 +396,7 @@ class ToDoList extends Component {
       submissiondateSortmethodUpOptsClassName['className'] = "fa fa-arrow-circle-up current";
     }
     let submissiondateSortmethodUpOpts = {};
-    submissiondateSortmethodUpOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Submission_date","ASC",this.props.postbatch);
+    submissiondateSortmethodUpOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Submission_date","ASC",this.props.postbatch,"");
     const submissiondateSortmethodUp = (<i {...submissiondateSortmethodUpOptsClassName} {...submissiondateSortmethodUpOpts}></i>);
     let submissiondateSortmethodDownOptsClassName = {};
     submissiondateSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down";
@@ -404,13 +404,13 @@ class ToDoList extends Component {
       submissiondateSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down current";
     }
     let submissiondateSortmethodDownOpts = {};
-    submissiondateSortmethodDownOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Submission_date","DESC",this.props.postbatch);
+    submissiondateSortmethodDownOpts['onClick'] = this.props.readPost.bind(this,this.props.page,this.props.origin,"","Submission_date","DESC",this.props.postbatch,"");
     const submissiondateSortmethodDown = (<i {...submissiondateSortmethodDownOptsClassName} {...submissiondateSortmethodDownOpts}></i>);
     const submissiondateColumnTitle = (<div className="column-title"><span>Created At</span>{submissiondateSortmethodUp}{submissiondateSortmethodDown}</div>);
     let resetSortmethodSortbyOptsClassName = {};
     resetSortmethodSortbyOptsClassName['className'] = "fa fa-power-off";
     let resetSortmethodSortbyOpts = {};
-    resetSortmethodSortbyOpts['onClick'] = this.props.readPost.bind(this,1,this.props.origin,"","Submission_date","DESC",4,0);
+    resetSortmethodSortbyOpts['onClick'] = this.props.readPost.bind(this,1,this.props.origin,"","Submission_date","DESC",4,"");
     const resetSortmethodSortby = (<i {...resetSortmethodSortbyOptsClassName} {...resetSortmethodSortbyOpts}></i>);
     const resetSortmethodSortbyColumnTitle = (<div className="column-title">{resetSortmethodSortby}</div>);
     let postbatch_select = this.props.postbatch_select.map(

@@ -43,12 +43,7 @@ class PageHeader extends Component {
       request_profanitylist: [],
       isSnackbarActive: false,
       snackbarTimeout: 5000,
-      snackbarMessage: "",
-      modalOpenDialog: false,
-      modalTitle: "",
-      modalMessage: "",
-      modalButtonTitle: "",
-      modalCallback: 1
+      snackbarMessage: ""
     };
     this.createPost = this.createPost.bind(this);
     this.readPost = this.readPost.bind(this);
@@ -69,7 +64,7 @@ class PageHeader extends Component {
     this.markTodoDone = this.markTodoDone.bind(this);
     this.toggleEndpoints = this.toggleEndpoints.bind(this);
     this.toggleEnableprofanityfilter = this.toggleEnableprofanityfilter.bind(this);
-    this.readPost(this.state.page);
+    this.readPost(this.state.page,"","",this.state.sortmethod,this.state.sortby,this.state.postbatch,"");
   }
   componentDidUpdate(){
     const mdlLayoutDrawerButton = document.querySelector(".mdl-layout__drawer-button");
@@ -245,9 +240,9 @@ class PageHeader extends Component {
           snackbarTimeout: this.state.snackbarTimeout,
           snackbarMessage: error ? (error !== "" ? error : "") : false
         },function(){
-          if(this.props.global_consoleDebug){
+          //if(this.props.global_consoleDebug){
             console.log('Header: readPost(): this.state:', this.state);
-          }
+          //}
           this.toggleEndpoints(this.state.restapiEndpointType);
         });
         if(json !== ""){
@@ -319,7 +314,7 @@ class PageHeader extends Component {
       if(this.props.global_consoleDebug){
         console.log('Header: deletePost(): Success: data:', data);
       }
-      this.readPost(this.state.page,"delete-post",json);
+      this.readPost(this.state.page,"delete-post",json,this.state.sortmethod,this.state.sortby,this.state.postbatch,"");
     })
     .catch((error) => {
       error.text().then( errorMessage => {
@@ -554,7 +549,7 @@ class PageHeader extends Component {
     if(this.props.global_consoleDebug){
       console.log('Header: handleSelectChange():  page: ',page,' origin: ',origin,' json: ',json,' sortmethod: ',sortmethod,' sortby: ',sortby,' postbatch: ',event.target.value);
     }
-    this.readPost(page,origin,json,sortmethod,sortby,event.target.value);
+    this.readPost(page,origin,json,sortmethod,sortby,event.target.value,"");
   }
   handleChange(e) {
     this.setState({
