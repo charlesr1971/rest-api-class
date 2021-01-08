@@ -11,6 +11,7 @@ import {
 import ToDoList from "./ToDoList";
 import Posts from "./Posts";
 import NotFound from "./NotFound";
+import SnackBar from "./SnackBar";
 
 class PageHeader extends Component {
   constructor(props) {
@@ -39,7 +40,15 @@ class PageHeader extends Component {
       request_postbatch: 4,
       postbatch_select: [],
       enableprofanityfilter: 0,
-      request_profanitylist: []
+      request_profanitylist: [],
+      isSnackbarActive: false,
+      snackbarTimeout: 5000,
+      snackbarMessage: "",
+      modalOpenDialog: false,
+      modalTitle: "",
+      modalMessage: "",
+      modalButtonTitle: "",
+      modalCallback: 1
     };
     this.createPost = this.createPost.bind(this);
     this.readPost = this.readPost.bind(this);
@@ -149,7 +158,6 @@ class PageHeader extends Component {
         }
       }
       else{
-        this.createSnackBar(data['error']);
         if(this.props.global_consoleDebug){
           console.log('Header: createPost(): error:', data['error']);
         }
@@ -167,7 +175,6 @@ class PageHeader extends Component {
         data['response'] = "500";
         data['error'] = errorText;
         const json = JSON.stringify(data,null,2);
-        this.createSnackBar(data['error']);
         if(this.props.global_consoleDebug){
           console.log('Header: createPost(): error:', data['error']);
         }
@@ -189,7 +196,7 @@ class PageHeader extends Component {
     }
     if(origin !== ""){
       this.setState({
-        dataFetched: false  
+        dataFetched: false
       });
     }
     const url = this.state.restapiEndpoint + "/posts/" + page + "/" + sortmethod + "/" + sortby + "/" + postbatch;
@@ -233,11 +240,14 @@ class PageHeader extends Component {
           postbatch: postbatch,
           request_postbatch: data['request_postbatch'], 
           postbatch_select: data['postbatch_select'],
-          request_profanitylist: data['request_profanitylist']
+          request_profanitylist: data['request_profanitylist'],
+          isSnackbarActive: error ? (error !== "" ? true : false) : false,
+          snackbarTimeout: this.state.snackbarTimeout,
+          snackbarMessage: error ? (error !== "" ? error : "") : false
         },function(){
-          //if(this.props.global_consoleDebug){
+          if(this.props.global_consoleDebug){
             console.log('Header: readPost(): this.state:', this.state);
-          //}
+          }
           this.toggleEndpoints(this.state.restapiEndpointType);
         });
         if(json !== ""){
@@ -322,7 +332,6 @@ class PageHeader extends Component {
         data['response'] = "500";
         data['error'] = errorText;
         const json = JSON.stringify(data,null,2);
-        this.createSnackBar(data['error']);
         if(this.props.global_consoleDebug){
           console.log('Header: deletePost(): error:', data['error']);
         }
@@ -332,18 +341,18 @@ class PageHeader extends Component {
   }
   // UDF Methods
   showProfanitylist(){
-    //if(this.props.global_consoleDebug){
+    if(this.props.global_consoleDebug){
       console.log("Header: showProfanitylist()");
-    //}
+    }
     const profanityList = document.querySelector(".profanity-list");
-    //if(this.props.global_consoleDebug){
+    if(this.props.global_consoleDebug){
       console.log("Header: showProfanitylist(): profanityList: ",profanityList);
-    //}
+    }
     if(profanityList){
       const display = profanityList.style.display;
-      //if(this.props.global_consoleDebug){
+      if(this.props.global_consoleDebug){
         console.log("Header: showProfanitylist(): display: ",display);
-      //}
+      }
       if(display.trim() === "none"){
         profanityList.style.display = "block";
       }
@@ -357,14 +366,14 @@ class PageHeader extends Component {
     var message = (arguments[1] != null) ? arguments[1] : "";
     var buttonTitle = (arguments[2] != null) ? arguments[2] : "";
     var callback = (arguments[3] != null) ? arguments[3] : 0;
-    //if(this.props.global_consoleDebug){
+    if(this.props.global_consoleDebug){
       console.log("Header: openModal(): callback: ",callback);
-    //}
+    }
     const id = "dialog-modal";
     let dialogContainer = document.getElementById(id);
-    //if(this.props.global_consoleDebug){
+    if(this.props.global_consoleDebug){
       console.log("Header: openModal(): dialogContainer: ",dialogContainer);
-    //}
+    }
     if(!dialogContainer){
       const dialog = document.createElement("dialog");
       dialog.setAttribute("id",id);
@@ -614,18 +623,18 @@ class PageHeader extends Component {
       restapiEndpoint: type === "secure" ? this.props.global_restapiEndpointSecure : this.props.global_restapiEndpointInsecure,
       restapiEndpointType: type 
     },function(){
-      //if(this.props.global_consoleDebug){
+      if(this.props.global_consoleDebug){
         console.log("Header: toggleEndpoints(): this.state.restapiEndpoint: ",this.state.restapiEndpoint," this.state.restapiEndpointType: ",this.state.restapiEndpointType);
-      //}
+      }
     });
   }
   toggleEnableprofanityfilter(type) {
     this.setState({
       enableprofanityfilter: type 
     },function(){
-      //if(this.props.global_consoleDebug){
+      if(this.props.global_consoleDebug){
         console.log("Header: toggleEnableprofanityfilter(): this.state.enableprofanityfilter: ",this.state.enableprofanityfilter);
-      //}
+      }
     });
   }
   render() {
@@ -669,7 +678,8 @@ class PageHeader extends Component {
                     console.log("Header: render 2: this.state ", this.state);
                   }
                   return (
-                    <Posts posts={this.state.posts} removeTodo={this.removeTodo} markTodoDone={this.markTodoDone} addTodo={this.addTodo} readPost={this.readPost} pages={this.state.pages} postCount={this.state.postCount} handleChange={this.handleChange} handleContentChange={this.handleContentChange} inputValue={this.state.inputValue} contentValue={this.state.contentValue} postCountPrev={this.state.postCountPrev} toggleEndpoints={this.toggleEndpoints} restapiEndpointType={this.state.restapiEndpointType} page={this.state.page} maxpostpage={this.state.maxpostpage} sortmethod={this.state.sortmethod} sortby={this.state.sortby} postbatch={this.state.postbatch} request_postbatch={this.state.request_postbatch} postbatch_select={this.state.postbatch_select} handleSelectChange={this.handleSelectChange} enableprofanityfilter={this.state.enableprofanityfilter} toggleEnableprofanityfilter={this.toggleEnableprofanityfilter} openModal={this.openModal} showProfanitylist={this.showProfanitylist} global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />)
+                      <Posts posts={this.state.posts} removeTodo={this.removeTodo} markTodoDone={this.markTodoDone} addTodo={this.addTodo} readPost={this.readPost} pages={this.state.pages} postCount={this.state.postCount} handleChange={this.handleChange} handleContentChange={this.handleContentChange} inputValue={this.state.inputValue} contentValue={this.state.contentValue} postCountPrev={this.state.postCountPrev} toggleEndpoints={this.toggleEndpoints} restapiEndpointType={this.state.restapiEndpointType} page={this.state.page} maxpostpage={this.state.maxpostpage} sortmethod={this.state.sortmethod} sortby={this.state.sortby} postbatch={this.state.postbatch} request_postbatch={this.state.request_postbatch} postbatch_select={this.state.postbatch_select} handleSelectChange={this.handleSelectChange} enableprofanityfilter={this.state.enableprofanityfilter} toggleEnableprofanityfilter={this.toggleEnableprofanityfilter} openModal={this.openModal} showProfanitylist={this.showProfanitylist} global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />
+                    );
                   }
                 }
               />
@@ -684,17 +694,24 @@ class PageHeader extends Component {
                   const post = this.state.posts.find(
                     (post) => post.slug === props.match.params.postSlug
                   );
-                  if (post)
+                  if (post) {
                     return (
                       <ToDoList origin="post" posts={this.state.posts} id={post.id} removeTodo={this.removeTodo} markTodoDone={this.markTodoDone} addTodo={this.addTodo} readPost={this.readPost} pages={this.state.pages} postCount={this.state.postCount} handleChange={this.handleChange} handleContentChange={this.handleContentChange} inputValue={this.state.inputValue} contentValue={this.state.contentValue} postCountPrev={this.state.postCountPrev} toggleEndpoints={this.toggleEndpoints} restapiEndpointType={this.state.restapiEndpointType} page={this.state.page} maxpostpage={this.state.maxpostpage} sortmethod={this.state.sortmethod} sortby={this.state.sortby} postbatch={this.state.postbatch} request_postbatch={this.state.request_postbatch} postbatch_select={this.state.postbatch_select} handleSelectChange={this.handleSelectChange} enableprofanityfilter={this.state.enableprofanityfilter} toggleEnableprofanityfilter={this.toggleEnableprofanityfilter} openModal={this.openModal} showProfanitylist={this.showProfanitylist} global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />
                     );
-                  else return <NotFound global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />;
-                }}
+                  }
+                  else { 
+                    return (
+                      <NotFound global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />
+                    );
+                  }
+                }
+              }
               />
               <Route component={NotFound} />
             </Switch>
           </div>
         </Content>
+        <SnackBar isSnackbarActive={this.state.isSnackbarActive} snackbarTimeout={this.state.snackbarTimeout} snackbarMessage={this.state.snackbarMessage} global_consoleDebug={this.props.global_consoleDebug} />
       </Layout>
       )
       :

@@ -28,9 +28,9 @@ class EnableProfanityFilter extends Component {
   }
   render() {
     const enableprofanityfilter = this.props.enableprofanityfilter;
-    //if(this.props.global_consoleDebug){
+    if(this.props.global_consoleDebug){
       console.log("EnableProfanityFilter: render(): enableprofanityfilter: ",enableprofanityfilter);
-    //}
+    }
     return (
       <p className="radio-container">
         <RadioGroup name="radio-yes-no" value={enableprofanityfilter}>

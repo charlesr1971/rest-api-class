@@ -38,23 +38,23 @@ class ToDo extends Component {
         <Link to={{
           pathname: link,
           state: {
-          id: this.props.keyRef,
-          slug: this.props.slug,
-          title: this.props.title,
-          content: this.props.content,
-          done: true,
-          createdAt: this.props.createdAt,
-          postid: this.props.postid
+            id: this.props.keyRef,
+            slug: this.props.slug,
+            title: this.props.title,
+            content: this.props.content,
+            done: true,
+            createdAt: this.props.createdAt,
+            postid: this.props.postid
           }
         }}>
           <i className="fa fa-link"></i>
         </Link>
         <Checkbox 
-        id={id2} 
-        label={this.props.title} 
-        onChange={this.props.removeTodo} 
-        ripple 
-        checked
+          id={id2} 
+          label={this.props.title} 
+          onChange={this.props.removeTodo} 
+          ripple 
+          checked
          />
         <div className="createdat-container">{this.props.createdAt}</div>
       </div>

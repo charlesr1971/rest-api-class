@@ -28,9 +28,9 @@ class Endpoint extends Component {
   }
   render() {
     const restapiEndpointType = this.props.restapiEndpointType;
-    //if(this.props.global_consoleDebug){
+    if(this.props.global_consoleDebug){
       console.log("Endpoint: render(): restapiEndpointType: ",restapiEndpointType);
-    //}
+    }
     return (
       <p className="radio-container">
         <RadioGroup name="radio-secure-insecure" value={this.props.restapiEndpointType}>
