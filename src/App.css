@@ -663,6 +663,10 @@ select.profanity-list {
   color: rgba(0,0,0, 0.54); 
 }
 
+dialog + .backdrop {
+  background: rgba(0,0,0,0.75) !important;
+}
+
 /* media queries */
 
 /* smart phones */
