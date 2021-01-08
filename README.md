@@ -10,7 +10,9 @@ The CDN version of this project, used the following React files:
 
     React v17.0.1
 
-    https://unpkg.com/react/umd/react.development.js https://unpkg.com/react-dom/umd/react-dom.development.js https://unpkg.com/react-router-dom@4.3.1/umd/react-router-dom.js
+    https://unpkg.com/react/umd/react.development.js 
+    https://unpkg.com/react-dom/umd/react-dom.development.js 
+    https://unpkg.com/react-router-dom@4.3.1/umd/react-router-dom.js
 
 ## App Structure ##
 
