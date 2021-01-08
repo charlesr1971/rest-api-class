@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, CardText, CardTitle, CardActions, CardMenu, IconButton  } from 'react-mdl';
 
 class Post extends Component {
   constructor(props) {
@@ -15,21 +16,28 @@ class Post extends Component {
     const defaultStyle2 = {
       padding: "20px"
     };
+    let optsClassName1 = {};
+    optsClassName1['className'] = "demo-card-wide";
+    let optsClassName2 = {};
+    optsClassName2['className'] = "post";
     return (
-      <div className="demo-card-wide mdl-card mdl-shadow--2dp" style={defaultStyle1}>
-        <div className="mdl-card__title post">
+      <Card shadow={0} {...optsClassName1} style={defaultStyle1}>
+        <CardTitle {...optsClassName2}>
           <h2 className="mdl-card__title-text">{this.props.title}</h2>
-        </div>
-        <div className="mdl-card__supporting-text">
+        </CardTitle>
+        <CardText>
           {this.props.createdAt}
           <i className="fa fa-trash" onClick={this.props.removeTodo}></i>
-        </div>
-        <div className="mdl-card__actions mdl-card--border">
+        </CardText>
+        <CardActions border>
           <div className="todo-container" style={defaultStyle2}>
             {this.props.content}
           </div>
-        </div>
-      </div>
+        </CardActions>
+        <CardMenu style={{color: '#fff'}}>
+          <IconButton name="share" />
+        </CardMenu>
+      </Card>
     );
   }
 }

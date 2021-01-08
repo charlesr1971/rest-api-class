@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Textfield, Button, Spinner } from 'react-mdl';
+import { Textfield, Button, Spinner, Card, CardText, CardTitle, CardActions, CardMenu, IconButton  } from 'react-mdl';
 import { CSSPlugin, TweenMax, Elastic } from "gsap";
 import {
   BrowserRouter as Router,
@@ -488,24 +488,32 @@ class ToDoList extends Component {
     const clearbothStyle = {
       clear: "both"
     };
+    let optsClassName1 = {};
+    optsClassName1['className'] = "demo-card-wide";
+    let optsClassName2 = {};
+    optsClassName2['className'] = "posts";
+    let optsClassName3 = {};
+    optsClassName3['className'] = "enableprofanityfilter";
+    let optsClassName4 = {};
+    optsClassName4['className'] = "columns";
     return (
       this.state.redirect == false ? (
       this.props.origin == "posts" ? 
       (
-      <div className="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div className="mdl-card__title posts">
+      <Card shadow={0} {...optsClassName1}>
+        <CardTitle {...optsClassName2}>
           <h2 className="mdl-card__title-text">Posts<span><i id="post-count-icon" className="fa fa-files-o"></i>{this.state.postCount}</span></h2>
-        </div>
-        <div className="mdl-card__supporting-text">
+        </CardTitle>
+        <CardText>
           Please choose between the following endpoints:
           <Endpoint toggleEndpoints={this.props.toggleEndpoints} restapiEndpointType={this.props.restapiEndpointType} global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />
-        </div>
-        <div className="mdl-card__actions mdl-card--border enableprofanityfilter">
+        </CardText>
+        <CardActions border {...optsClassName3}>
           Please choose whether to enable the profanity filter:
           <EnableProfanityFilter toggleEnableprofanityfilter={this.props.toggleEnableprofanityfilter} enableprofanityfilter={this.props.enableprofanityfilter} global_height={this.props.global_height} global_consoleDebug={this.props.global_consoleDebug} global_enableProfanityFilter={this.props.global_enableProfanityFilter} global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} />
           {openProfanitylistModal}
-        </div>
-        <div className="mdl-card__actions mdl-card--border columns">
+        </CardActions>
+        <CardActions border {...optsClassName4}>
           <div className="column-title-container">
             <div className="column-title-container-inner">
               {titleColumnTitle}
@@ -514,8 +522,8 @@ class ToDoList extends Component {
               {postbatch_select}
             </div>
           </div>
-        </div>
-        <div className="mdl-card__actions mdl-card--border">
+        </CardActions>
+        <CardActions border>
           <div className="todo-container" style={todocontainerStyle}>
             {todos}
           </div>
@@ -556,8 +564,11 @@ class ToDoList extends Component {
             </div>
           </div>
           <div style={clearbothStyle}></div>
-        </div>
-      </div>
+        </CardActions>
+        <CardMenu style={{color: '#fff'}}>
+          <IconButton name="share" />
+        </CardMenu>
+      </Card>
       )
       :
       (
