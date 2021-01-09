@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Checkbox } from 'react-mdl';
-import {
-  BrowserRouter as Router,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class ToDo extends Component {
   constructor(props) {

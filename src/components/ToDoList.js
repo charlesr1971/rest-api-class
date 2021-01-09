@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Textfield, Button, Spinner, Card, CardText, CardTitle, CardActions, CardMenu, IconButton  } from 'react-mdl';
 import { CSSPlugin, TweenMax, Elastic } from "gsap";
-import {
-  BrowserRouter as Router,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
 
 import ToDo from "./ToDo";
 import Post from "./Post";

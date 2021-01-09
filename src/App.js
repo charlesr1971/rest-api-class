@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { createBrowserHistory } from 'history';
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 
 import PageHeader from "./components/PageHeader";
 

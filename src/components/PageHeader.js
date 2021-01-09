@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 import { format } from "date-fns";
-import {
-  Switch,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import { Switch, Route, Link, NavLink } from "react-router-dom";
 
 import ToDoList from "./ToDoList";
 import Posts from "./Posts";

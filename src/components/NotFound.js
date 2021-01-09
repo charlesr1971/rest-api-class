@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Redirect} from "react-router-dom";
 
 class NotFound extends Component {
   constructor(props) {
