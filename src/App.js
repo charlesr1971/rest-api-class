@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createBrowserHistory } from 'history';
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
@@ -13,6 +14,10 @@ const global_enableProfanityFilter = 1;
 
 const global_restapiEndpointInsecure = document.domain === "localhost" ? "http://localhost:8500/react/react-router-es6/assets/cfm/rest/api/v1/index.cfm" : "http://playground.application.me.uk/react-router-es6/assets/cfm/rest/api/v1/index.cfm";
 const global_restapiEndpointSecure = document.domain === "localhost" ? "http://localhost:8500/react/react-router-es6/assets/cfm/rest/api/v1/index.cfm" : "https://community.establishmindfulness.com/assets-react_es6_restapi/cfm/rest/api/v1/index.cfm";
+
+export const history = createBrowserHistory({
+  basename: process.env.PUBLIC_URL
+});
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +35,7 @@ class App extends Component {
   }
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="App">
           <PageHeader global_height={this.state.global_height} global_consoleDebug={this.state.global_consoleDebug}  global_enableProfanityFilter={this.state.global_enableProfanityFilter}  global_restapiEndpointInsecure={this.state.global_restapiEndpointInsecure}  global_restapiEndpointSecure={this.state.global_restapiEndpointSecure} />
         </div>

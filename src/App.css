@@ -306,12 +306,12 @@ i.app-enableprofanityfilter {
   width: 100%;
   color: #fff;
   height: 176px;
-  /*background: url('https://getmdl.io/assets/demos/welcome_card.jpg') center / cover;*/
-  background: url('https://www.barefoot-buddha.com/assets/images/dog.png') bottom right 15% no-repeat #40c4ff;
+  /*background: url('./assets/images/welcome_card.jpg') center / cover;*/
+  background: url('./assets/images/dog.png') bottom right 15% no-repeat #40c4ff;
 }
 
 .demo-card-wide > .mdl-card__title.post {
-  background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
+  background: url('./assets/images/transparent.jpg') center / cover;
   overflow: visible;
 }
 
@@ -756,7 +756,7 @@ dialog + .backdrop {
 @media only screen and (min-device-width : 320px) and (max-device-width : 812px) {
   
   .demo-card-wide > .mdl-card__title {
-    background: url('https://www.barefoot-buddha.com/assets/images/dog.png') bottom right 50% no-repeat #40c4ff;
+    background: url('./assets/images/dog.png') bottom right 50% no-repeat #40c4ff;
   }
   
   .demo-card-wide label.mdl-checkbox, .demo-card-wide label.mdl-radio {
