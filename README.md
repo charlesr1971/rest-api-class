@@ -1,6 +1,12 @@
 # REACT ES6 REST API #
 
+**React Type:** Class Component
+
 ## Introduction ##
+
+Simple SPA that allows a user to submit a post, consisting of title and content. Each post gets allocated a dynamically created slug, which allows the post to link to a details page. The post can be deleted from both the list page and the details page. The list of posts can be reordered, using a simple up and down arrow system. The reorder system uses GSAP's TweenMax animation plugin to provide helpful directional hints.
+
+## Repo ##
 
 This repo contains a **create-react-app** version of the CDN codepen.io app at:
 
@@ -13,6 +19,24 @@ The CDN version of this project, used the following React files:
     https://unpkg.com/react/umd/react.development.js 
     https://unpkg.com/react-dom/umd/react-dom.development.js 
     https://unpkg.com/react-router-dom@4.3.1/umd/react-router-dom.js
+
+## Features ##
+
+1. React Router
+2. React State/Props 
+3. React Material Design Lite [mdl] UI:
+   https://getmdl.io/
+   https://tleunen.github.io/react-mdl/components/
+4. Clientside Fetch API   
+5. Remote REST API, using Taffy.io:
+   https://taffy.io/
+6. Lucee Application Server [CFML] on Windows 2012R2 IIS7
+   https://www.lucee.org/
+7. Pagination system
+8. Sort by title and submission date, both in ascending and descending order
+9. Change post per page amount   
+10. Profanity filter   
+11. Reset feature
 
 ## App Structure ##
 

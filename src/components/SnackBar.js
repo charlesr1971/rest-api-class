@@ -19,9 +19,9 @@ class SnackBar extends Component {
         snackbarTimeout: this.props.snackbarTimeout,
         snackbarMessage: this.props.snackbarMessage
       },function(){
-        //if(this.props.global_consoleDebug){
+        if(this.props.global_consoleDebug){
           console.log("SnackBar: componentDidMount(): this.state.isSnackbarActive: ",this.state.isSnackbarActive," this.state.snackbarTimeout: ",this.state.snackbarTimeout," this.state.snackbarMessage: ",this.state.snackbarMessage);
-        //}
+        }
       });
     }.bind(this),1000);
   }

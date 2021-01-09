@@ -235,9 +235,9 @@ class PageHeader extends Component {
           snackbarTimeout: this.state.snackbarTimeout,
           snackbarMessage: error ? (error !== "" ? error : "") : false
         },function(){
-          //if(this.props.global_consoleDebug){
+          if(this.props.global_consoleDebug){
             console.log('Header: readPost(): this.state:', this.state);
-          //}
+          }
           this.toggleEndpoints(this.state.restapiEndpointType);
         });
         if(json !== ""){
