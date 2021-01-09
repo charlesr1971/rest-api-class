@@ -30,6 +30,10 @@ The CDN version of this project, used the following React files:
     -- ToDo
     -- ToDoList
 
+## Remote Build ##
+
+https://community.establishmindfulness.com/assets-react_es6_restapi/index.html
+
 ## Notes ##
 
 The following modules were imported to replace CDN JavaScript source files:
