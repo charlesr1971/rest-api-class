@@ -30,7 +30,7 @@ The CDN version of this project, used the following React files:
 4. Clientside Fetch API   
 5. Remote REST API, using Taffy.io:
    https://taffy.io/
-6. Lucee Application Server [CFML] on Windows 2012R2 IIS7
+6. Lucee Tomcat Application Server [Coldfusion: CFML] on Windows 2012R2 IIS7
    https://www.lucee.org/
 7. Pagination system
 8. Sort by title and submission date, both in ascending and descending order
