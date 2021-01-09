@@ -125,8 +125,8 @@ class PageHeader extends Component {
   // CRUD
   // Post: CREATE
   createPost(title,content){
-    title = (arguments[0] != null) ? arguments[0] : "";
-    content = (arguments[1] != null) ? arguments[1] : "";
+    title = (arguments[0] !== null) ? arguments[0] : "";
+    content = (arguments[1] !== null) ? arguments[1] : "";
     const path = "/post/0";
     const url = this.state.restapiEndpoint + "/post/0/" + this.state.enableprofanityfilter;
     fetch(url,{
@@ -179,13 +179,13 @@ class PageHeader extends Component {
   }
   // Post: READ
   readPost(page,origin,json,sortmethod,sortby,postbatch,error){
-    page = (arguments[0] != null) ? arguments[0] : 1;
-    origin = (arguments[1] != null) ? arguments[1] : "";
-    json = (arguments[2] != null) ? arguments[2] : "";
-    sortmethod = (arguments[3] != null) ? arguments[3] : this.state.sortmethod;
-    sortby = (arguments[4] != null) ? arguments[4] : this.state.sortby;
-    postbatch = (arguments[5] != null) ? arguments[5] : this.state.postbatch;
-    error = (arguments[6] != null) ? arguments[6] : "";
+    page = (arguments[0] !== null) ? arguments[0] : 1;
+    origin = (arguments[1] !== null) ? arguments[1] : "";
+    json = (arguments[2] !== null) ? arguments[2] : "";
+    sortmethod = (arguments[3] !== null) ? arguments[3] : this.state.sortmethod;
+    sortby = (arguments[4] !== null) ? arguments[4] : this.state.sortby;
+    postbatch = (arguments[5] !== null) ? arguments[5] : this.state.postbatch;
+    error = (arguments[6] !== null) ? arguments[6] : "";
     if(this.props.global_consoleDebug){
       console.log('Header: readPost(): postbatch:', postbatch);
     }
@@ -291,7 +291,7 @@ class PageHeader extends Component {
   }
   // Post: DELETE
   deletePost(postid){
-    var postid = (arguments[0] != null) ? arguments[0] : 0;
+    var postid = (arguments[0] !== null) ? arguments[0] : 0;
     const path = "/post/" + postid;
     const url = this.state.restapiEndpoint + "/post/" + postid + "/0";
     fetch(url,{
@@ -357,10 +357,6 @@ class PageHeader extends Component {
     }
   }
   openModal(title,message,buttonTitle,callback) {
-    var title = (arguments[0] != null) ? arguments[0] : "";
-    var message = (arguments[1] != null) ? arguments[1] : "";
-    var buttonTitle = (arguments[2] != null) ? arguments[2] : "";
-    var callback = (arguments[3] != null) ? arguments[3] : 0;
     if(this.props.global_consoleDebug){
       console.log("Header: openModal(): callback: ",callback);
     }
@@ -377,7 +373,12 @@ class PageHeader extends Component {
       h3.classList.add("mdl-dialog__title");
       const h3Textnode = document.createTextNode(title);
       const div1 = document.createElement("div");
-      div1.classList.add("mdl-dialog__content");
+      if(callback === 1){
+        div1.classList.add("mdl-dialog__content","callback-1");
+      }
+      if(callback === 2){
+        div1.classList.add("mdl-dialog__content","callback-2");
+      }
       const p = document.createElement("p");
       const pTextnode = document.createTextNode(message);
       const select1 = document.createElement("select");
@@ -396,25 +397,71 @@ class PageHeader extends Component {
       const button1 = document.createElement("button");
       button1.classList.add("mdl-button","close");
       const button1Textnode = document.createTextNode("Close");
-      //if(buttonTitle.trim() != ""){
-        const button2 = document.createElement("button");
-        button2.classList.add("mdl-button","callback");
-        const button2Textnode = document.createTextNode(buttonTitle);
-      //}
+      const button2 = document.createElement("button");
+      button2.classList.add("mdl-button","callback");
+      const button2Textnode = document.createTextNode(buttonTitle);
       h3.appendChild(h3Textnode);
       p.appendChild(pTextnode);
       div1.appendChild(p);
       div1.appendChild(select1);
+      if(callback === 2){
+        const divShare = document.createElement("div");
+        const aTwitter = document.createElement("a");
+        const aTwitterText = encodeURIComponent("React ES6 REST API");
+        const aTwitterUrl = encodeURIComponent("https://community.establishmindfulness.com/assets-react_es6_restapi/index.html");
+        aTwitter.setAttribute("href","https://twitter.com/intent/tweet?text=" + aTwitterText + "&url=" + aTwitterUrl + "");
+        aTwitter.setAttribute("target","_blank");
+        const spanTwitter = document.createElement("span");
+        const iTwitter = document.createElement("i");
+        iTwitter.classList.add("fa","fa-twitter");
+        divShare.appendChild(aTwitter);
+        aTwitter.appendChild(spanTwitter);
+        spanTwitter.appendChild(iTwitter);
+        const aFacebook = document.createElement("a");
+        const aFacebookUrl = encodeURIComponent("https://community.establishmindfulness.com/assets-react_es6_restapi/index.html");
+        aFacebook.setAttribute("href","https://www.facebook.com/sharer/sharer.php?u=" + aFacebookUrl + "");
+        aFacebook.setAttribute("target","_blank");
+        const spanFacebook = document.createElement("span");
+        const iFacebook = document.createElement("i");
+        iFacebook.classList.add("fa","fa-facebook");
+        divShare.appendChild(aFacebook);
+        aFacebook.appendChild(spanFacebook);
+        spanFacebook.appendChild(iFacebook);
+        const aTumblr = document.createElement("a");
+        const aTumblrText = encodeURIComponent("React ES6 REST API");
+        const aTumblrUrl = encodeURIComponent("https://community.establishmindfulness.com/assets-react_es6_restapi/index.html");
+        aTumblr.setAttribute("href","https://www.tumblr.com/share/link?name=" + aTumblrText + "&url=" + aTumblrUrl + "");
+        aTumblr.setAttribute("target","_blank");
+        const spanTumblr = document.createElement("span");
+        const iTumblr = document.createElement("i");
+        iTumblr.classList.add("fa","fa-tumblr");
+        divShare.appendChild(aTumblr);
+        aTumblr.appendChild(spanTumblr);
+        spanTumblr.appendChild(iTumblr);
+        const aLinkedin = document.createElement("a");
+        const aLinkedinText = encodeURIComponent("React ES6 REST API");
+        const aLinkedinUrl = encodeURIComponent("https://community.establishmindfulness.com/assets-react_es6_restapi/index.html");
+        aLinkedin.setAttribute("href","https://www.linkedin.com/shareArticle?mini=true&title=" + aLinkedinText + "&url=" + aLinkedinUrl + "");
+        aLinkedin.setAttribute("target","_blank");
+        const spanLinkedin = document.createElement("span");
+        const iLinkedin = document.createElement("i");
+        iLinkedin.classList.add("fa","fa-linkedin");
+        divShare.appendChild(aLinkedin);
+        aLinkedin.appendChild(spanLinkedin);
+        spanLinkedin.appendChild(iLinkedin);
+        div1.appendChild(divShare);
+      }
       button1.appendChild(button1Textnode);
       div2.appendChild(button1);
-      //if(buttonTitle.trim() != ""){
-        button2.appendChild(button2Textnode);
-        div2.appendChild(button2);
-      //}
+      button2.appendChild(button2Textnode);
+      div2.appendChild(button2);
       dialog.appendChild(h3);
       dialog.appendChild(div1);
       dialog.appendChild(div2);
       document.body.appendChild(dialog);
+      if(buttonTitle.trim() === ""){
+        button2.style.display = "none";
+      } 
       window.componentHandler.upgradeDom();
       dialogContainer = document.getElementById(id);
     }
@@ -423,14 +470,12 @@ class PageHeader extends Component {
         window.dialogPolyfill.registerDialog(dialogContainer);
       }
       dialogContainer.showModal();
-      //if(buttonTitle.trim() != ""){
-        dialogContainer.querySelector('button.callback')
-        .addEventListener('click', function() {
-          if(callback === 1){
-            this.showProfanitylist();
-          }
-        }.bind(this));
-      //}
+      dialogContainer.querySelector('button.callback')
+      .addEventListener('click', function() {
+        if(callback === 1){
+          this.showProfanitylist();
+        }
+      }.bind(this));
       dialogContainer.querySelector('button.close')
       .addEventListener('click', function() {
         dialogContainer.close();
@@ -442,8 +487,8 @@ class PageHeader extends Component {
     }
   }
   createSnackBar(message,type) {
-    var message = (arguments[0] != null) ? arguments[0] : "";
-    var type = (arguments[1] != null) ? arguments[1] : "";
+    var message = (arguments[0] !== null) ? arguments[0] : "";
+    var type = (arguments[1] !== null) ? arguments[1] : "";
     const id = "snackbar-message";
     let snackbarContainer = document.getElementById(id);
     if(this.props.global_consoleDebug){
@@ -500,8 +545,8 @@ class PageHeader extends Component {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   createSlug(slug,id) {
-    var slug = (arguments[0] != null) ? arguments[0] : "";
-    var id = (arguments[1] != null) ? arguments[1] : parseInt(this.state.posts.length + 1);
+    var slug = (arguments[0] !== null) ? arguments[0] : "";
+    var id = (arguments[1] !== null) ? arguments[1] : parseInt(this.state.posts.length + 1);
     let value = "";
     const punctuationPattern = /[.,\/#!$%\^&\*;:{}=\-_`~()]/gim;
     value = slug.replace(punctuationPattern, "");
@@ -516,7 +561,7 @@ class PageHeader extends Component {
   }
   addTodo() {
     const todos = this.state.posts;
-    if (this.state.inputValue.trim() != "") {
+    if (this.state.inputValue.trim() !== "") {
       const inputValue = this.state.inputValue;
       const contentValue = this.state.contentValue;
       const slug = this.createSlug(inputValue);
@@ -541,11 +586,11 @@ class PageHeader extends Component {
     }
   }
   handleSelectChange(page,origin,json,sortmethod,sortby,event) {
-    var page = (arguments[0] != null) ? arguments[0] : 1;
-    var origin = (arguments[1] != null) ? arguments[1] : "";
-    var json = (arguments[2] != null) ? arguments[2] : "";
-    var sortmethod = (arguments[3] != null) ? arguments[3] : this.state.sortmethod;
-    var sortby = (arguments[4] != null) ? arguments[4] : this.state.sortby;
+    var page = (arguments[0] !== null) ? arguments[0] : 1;
+    var origin = (arguments[1] !== null) ? arguments[1] : "";
+    var json = (arguments[2] !== null) ? arguments[2] : "";
+    var sortmethod = (arguments[3] !== null) ? arguments[3] : this.state.sortmethod;
+    var sortby = (arguments[4] !== null) ? arguments[4] : this.state.sortby;
     if(this.props.global_consoleDebug){
       console.log('Header: handleSelectChange():  page: ',page,' origin: ',origin,' json: ',json,' sortmethod: ',sortmethod,' sortby: ',sortby,' postbatch: ',event.target.value);
     }
@@ -584,9 +629,9 @@ class PageHeader extends Component {
     });		
   }
   removeTodo(index,origin,postid) {
-    var index = (arguments[0] != null) ? arguments[0] : 0;
-    var origin = (arguments[1] != null) ? arguments[1] : "";
-    var postid = (arguments[2] != null) ? arguments[2] : 0;
+    var index = (arguments[0] !== null) ? arguments[0] : 0;
+    var origin = (arguments[1] !== null) ? arguments[1] : "";
+    var postid = (arguments[2] !== null) ? arguments[2] : 0;
     if(this.props.global_consoleDebug){
       console.log("Header: removeTodo(): index: ",index," origin: ",origin," postid: ",postid);
     }

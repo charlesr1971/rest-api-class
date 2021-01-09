@@ -76,7 +76,7 @@ class ToDoList extends Component {
       console.log("ToDoList: componentDidMount()...");
     }
     setTimeout(function(){
-      if(this.props.postCount != this.props.postCountPrev){
+      if(this.props.postCount !== this.props.postCountPrev){
         this.animatePostCountIcon();
       }
     }.bind(this),0);
@@ -182,13 +182,13 @@ class ToDoList extends Component {
       );
       obj = {};
       obj["index"] = index1;
-      obj["indexNew"] = direction == "up" ? index1 - 1 : index1 + 1;
-      obj["top"] = direction == "up" ? -y : y;
+      obj["indexNew"] = direction === "up" ? index1 - 1 : index1 + 1;
+      obj["top"] = direction === "up" ? -y : y;
       movementMatrix[index1] = obj;
       obj = {};
       obj["index"] = index2;
-      obj["indexNew"] = direction == "up" ? index2 - 1 : index2 + 1;
-      obj["top"] = direction == "up" ? y : -y;
+      obj["indexNew"] = direction === "up" ? index2 - 1 : index2 + 1;
+      obj["top"] = direction === "up" ? y : -y;
       movementMatrix[index2] = obj;
     }
     if(this.props.global_consoleDebug){
@@ -260,8 +260,8 @@ class ToDoList extends Component {
     // top1: y movement of item to move
     let top1 = 0;
     // direction2: direction of item to be swapped
-    let direction2 = direction1 == "up" ? "down" : "up";
-    if (direction1 == "up") {
+    let direction2 = direction1 === "up" ? "down" : "up";
+    if (direction1 === "up") {
       top1 = index1 > 0 ? -this.height : maxDistanceDown;
       direction2 = index1 > 0 ? "down" : "up";
       index_1 = index1 > 0 ? index1 - 1 : this.state.todos.length - 1;
@@ -277,17 +277,17 @@ class ToDoList extends Component {
     let index_2 = 0;
     // top1: y movement of item to be swapped
     let top2 = 0;
-    if (direction1 == "up") {
-      index2 = index1 == 0 ? this.state.todos.length - 1 : index1 - 1;
-      top2 = index1 == 0 ? -this.height : this.height;
-      index_2 = index1 == 0 ? this.state.todos.length - 2 : index1;
-      allMoveUp = index1 == 0 ? true : false;
+    if (direction1 === "up") {
+      index2 = index1 === 0 ? this.state.todos.length - 1 : index1 - 1;
+      top2 = index1 === 0 ? -this.height : this.height;
+      index_2 = index1 === 0 ? this.state.todos.length - 2 : index1;
+      allMoveUp = index1 === 0 ? true : false;
     } 
     else {
-      index2 = index1 == this.state.todos.length - 1 ? 0 : index1 + 1;
-      top2 = index1 == this.state.todos.length - 1 ? this.height : -this.height;
-      index_2 = index1 == this.state.todos.length - 1 ? 1 : index1;
-      allMoveDown = index1 == this.state.todos.length - 1 ? true : false;
+      index2 = index1 === this.state.todos.length - 1 ? 0 : index1 + 1;
+      top2 = index1 === this.state.todos.length - 1 ? this.height : -this.height;
+      index_2 = index1 === this.state.todos.length - 1 ? 1 : index1;
+      allMoveDown = index1 === this.state.todos.length - 1 ? true : false;
     }
     this.createMovementMatrix(
       allMoveUp,
@@ -333,13 +333,13 @@ class ToDoList extends Component {
     );
     let prev = pages.map(
       function (page, index) {
-        const defaultStyle = this.props.page == 1 ? {cursor: "default", color: "rgba(0,0,0,0.05)"} : {cursor: "pointer", color: "rgba(0,0,0,0.5)"};
+        const defaultStyle = this.props.page === 1 ? {cursor: "default", color: "rgba(0,0,0,0.05)"} : {cursor: "pointer", color: "rgba(0,0,0,0.5)"};
         let opts = {};
-        if(this.props.page != 1) {
+        if(this.props.page !== 1) {
           opts['onClick'] = this.props.readPost.bind(this,parseInt(this.props.page - 1),this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch,"");
         }
         return (
-          page == 1 ? 
+          page === 1 ? 
           (
           <i className="fa fa-caret-left" style={defaultStyle} {...opts}></i>
           )
@@ -352,13 +352,13 @@ class ToDoList extends Component {
     );
     let next = pages.map(
       function (page, index) {
-        const defaultStyle = this.props.page == this.props.pages ? {cursor: "default", color: "rgba(0,0,0,0.05)"} : {cursor: "pointer", color: "rgba(0,0,0,0.5)"};
+        const defaultStyle = this.props.page === this.props.pages ? {cursor: "default", color: "rgba(0,0,0,0.05)"} : {cursor: "pointer", color: "rgba(0,0,0,0.5)"};
         let opts = {};
-        if(this.props.page != this.props.pages) {
+        if(this.props.page !== this.props.pages) {
           opts['onClick'] = this.props.readPost.bind(this,parseInt(this.props.page + 1),this.props.origin,"",this.props.sortmethod,this.props.sortby,this.props.postbatch,"");
         }
         return (
-          page == this.props.maxpostpage ? 
+          page === this.props.maxpostpage ? 
           (
           <i className="fa fa-caret-right" style={defaultStyle} {...opts}></i>
           )
@@ -375,7 +375,7 @@ class ToDoList extends Component {
     }
     let titleSortmethodUpOptsClassName = {};
     titleSortmethodUpOptsClassName['className'] = "fa fa-arrow-circle-up";
-    if(this.props.sortmethod == "Title" && this.props.sortby == "ASC") {
+    if(this.props.sortmethod === "Title" && this.props.sortby === "ASC") {
       titleSortmethodUpOptsClassName['className'] = "fa fa-arrow-circle-up current";
     }
     let titleSortmethodUpOpts = {};
@@ -383,7 +383,7 @@ class ToDoList extends Component {
     const titleSortmethodUp = (<i {...titleSortmethodUpOptsClassName} {...titleSortmethodUpOpts}></i>);
     let titleSortmethodDownOptsClassName = {};
     titleSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down";
-    if(this.props.sortmethod == "Title" && this.props.sortby == "DESC") {
+    if(this.props.sortmethod === "Title" && this.props.sortby === "DESC") {
       titleSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down current";
     }
     let titleSortmethodDownOpts = {};
@@ -392,7 +392,7 @@ class ToDoList extends Component {
     const titleColumnTitle = (<div className="column-title"><span>Title</span>{titleSortmethodUp}{titleSortmethodDown}</div>);
     let submissiondateSortmethodUpOptsClassName = {};
     submissiondateSortmethodUpOptsClassName['className'] = "fa fa-arrow-circle-up";
-    if(this.props.sortmethod == "Submission_date" && this.props.sortby == "ASC") {
+    if(this.props.sortmethod === "Submission_date" && this.props.sortby === "ASC") {
       submissiondateSortmethodUpOptsClassName['className'] = "fa fa-arrow-circle-up current";
     }
     let submissiondateSortmethodUpOpts = {};
@@ -400,7 +400,7 @@ class ToDoList extends Component {
     const submissiondateSortmethodUp = (<i {...submissiondateSortmethodUpOptsClassName} {...submissiondateSortmethodUpOpts}></i>);
     let submissiondateSortmethodDownOptsClassName = {};
     submissiondateSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down";
-    if(this.props.sortmethod == "Submission_date" && this.props.sortby == "DESC") {
+    if(this.props.sortmethod === "Submission_date" && this.props.sortby === "DESC") {
       submissiondateSortmethodDownOptsClassName['className'] = "fa fa-arrow-circle-down current";
     }
     let submissiondateSortmethodDownOpts = {};
@@ -421,10 +421,10 @@ class ToDoList extends Component {
       }.bind(this)
     );
     postbatch_select = (<div className="post-batch-select-column-title"><select className="custom" onChange={this.props.handleSelectChange.bind(this,this.props.page,this.props.origin,"",this.props.sortmethod,this.props.sortby)} value={this.props.postbatch}>{postbatch_select}</select></div>);
-    const openProfanitylistModal = this.state.enableProfanityFilter == 1 ? (<i className="fa fa-file-o" onClick={this.props.openModal.bind(this,"Profanity List","The profanity list contains highly offensive words. This list is for testing purposes only.","View Profanity List",1)}></i>) : ("") ;
+    const openProfanitylistModal = this.state.enableProfanityFilter === 1 ? (<i className="fa fa-file-o" onClick={this.props.openModal.bind(this,"Profanity List","The profanity list contains highly offensive words. This list is for testing purposes only.","View Profanity List",1)}></i>) : ("") ;
     // loop through list item array and initiate <ToDo /> child components
     let todos = null;
-    if(this.props.origin == "posts"){
+    if(this.props.origin === "posts"){
       todos = this.state.todos.map(
         function (todo, index) {
           return (
@@ -473,7 +473,8 @@ class ToDoList extends Component {
             global_consoleDebug={this.props.global_consoleDebug} 
             global_enableProfanityFilter={this.props.global_enableProfanityFilter} 
             global_restapiEndpointInsecure={this.props.global_restapiEndpointInsecure} 
-            global_restapiEndpointSecure={this.props.global_restapiEndpointSecure}
+            global_restapiEndpointSecure={this.props.global_restapiEndpointSecure} 
+            openModal={this.props.openModal} 
           />
           );
         }.bind(this)
@@ -497,8 +498,8 @@ class ToDoList extends Component {
     let optsClassName4 = {};
     optsClassName4['className'] = "columns";
     return (
-      this.state.redirect == false ? (
-      this.props.origin == "posts" ? 
+      this.state.redirect === false ? (
+      this.props.origin === "posts" ? 
       (
       <Card shadow={0} {...optsClassName1}>
         <CardTitle {...optsClassName2}>
@@ -566,7 +567,7 @@ class ToDoList extends Component {
           <div style={clearbothStyle}></div>
         </CardActions>
         <CardMenu style={{color: '#fff'}}>
-          <IconButton name="share" />
+          <IconButton name="share" onClick={this.props.openModal.bind(this,"Share","Click below to share","",2)} />
         </CardMenu>
       </Card>
       )

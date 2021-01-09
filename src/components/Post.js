@@ -9,7 +9,7 @@ class Post extends Component {
     window.componentHandler.upgradeDom();
   }
   render() {
-    const display = this.props.id1 == this.props.id2 ? "block" : "none";
+    const display = this.props.id1 === this.props.id2 ? "block" : "none";
     const defaultStyle1 = {
       display: display
     };
@@ -35,7 +35,7 @@ class Post extends Component {
           </div>
         </CardActions>
         <CardMenu style={{color: '#fff'}}>
-          <IconButton name="share" />
+          <IconButton name="share" onClick={this.props.openModal.bind(this,"Share","Click below to share","",2)} />
         </CardMenu>
       </Card>
     );
