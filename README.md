@@ -54,7 +54,7 @@ The CDN version of this project, used the following React files:
     -- ToDo
     -- ToDoList
 
-## Functional Components Repo ##    
+## Functional Components Repo ##
 
 https://bitbucket.org/charlesrobertson/react-restapi-functional-es6/src/master/
 
