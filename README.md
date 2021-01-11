@@ -54,7 +54,13 @@ The CDN version of this project, used the following React files:
     -- ToDo
     -- ToDoList
 
+## Functional Components Repo ##    
+
+https://bitbucket.org/charlesrobertson/react-restapi-functional-es6/src/master/
+
 ## Remote Build ##
+
+**Class Components:** 
 
 https://community.establishmindfulness.com/assets-react_es6_restapi/index.html
 

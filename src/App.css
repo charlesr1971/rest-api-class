@@ -826,6 +826,15 @@ dialog + .backdrop {
   .mdl-dialog__title {
     border-radius: 0px;
   }
+
+  .mdl-dialog__content a span {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .mdl-dialog__content a span i {
+    font-size: 24px;
+  }
   
   .mdl-dialog__actions {
     border-radius: 0px;
